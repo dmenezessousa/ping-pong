@@ -12,7 +12,7 @@ let restartGameButton = document.querySelector(".restart-btn");
 
 // Game Variables and Functions ======================
 
-////Get coordinates from these elements
+//Get coordinates from these elements
 let playerPadCoord = playerPaddle.getBoundingClientRect();
 let computerPadCoord = computerPaddle.getBoundingClientRect();
 let ballCoord = ball.getBoundingClientRect();
@@ -30,6 +30,19 @@ let playerPadYVelocity = 3.15;
 //Computer paddle Y position and velocity
 let computerPadYPosition = 400;
 let computerPadYVelocity = 3.15;
+
+//Game Elements Modification ========================
+
+//Size of the game area (in pixels)
+const GAME_AREA_WIDTH = 700;
+const GAME_AREA_HEIGHT = 500;
+
+// Size of the paddles (in px)
+const PADDLE_HEIGHT = 100;
+const PADDLE_WIDTH = 20;
+
+//Size of the ball (in px)
+const BALL_SIZE = 20;
 
 //reset ball and computer paddle positions
 function resetBallPosition() {
@@ -90,18 +103,21 @@ function moveBall() {
   }
 }
 
-//Game Elements Modification ========================
+//Computer paddle movement
+function moveComputerPaddle() {
+  if (ballYPosition > computerPadYPosition + PADDLE_HEIGHT / 2) {
+    if (computerPadYPosition + PADDLE_HEIGHT <= GAME_AREA_HEIGHT) {
+      computerPadYPosition += computerPadYVelocity;
+    }
+  } else{
+    if (computerPadYPosition >= 0) {
+      computerPadYPosition -= computerPadYVelocity;
+    }
+  }
 
-//Size of the game area (in pixels)
-const GAME_AREA_WIDTH = 700;
-const GAME_AREA_HEIGHT = 500;
-
-// Size of the paddles (in px)
-const PADDLE_HEIGHT = 100;
-const PADDLE_WIDTH = 20;
-
-//Size of the ball (in px)
-const BALL_SIZE = 20;
+  computerPaddle.style.top = `${computerPadYPosition}px`;
+  computerPadCoord = computerPaddle.getBoundingClientRect();
+}
 
 //Event Listeners ===================================
 
