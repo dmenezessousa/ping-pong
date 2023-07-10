@@ -119,6 +119,24 @@ function moveComputerPaddle() {
   computerPadCoord = computerPaddle.getBoundingClientRect();
 }
 
+//Start the game
+startGameButton.addEventListener("click", () => {
+  startGameButton.style.display = "none";
+  restartGameButton.style.display = "none";
+  ball.style.display = "block";
+  gameArea.style.display = "block";
+  setInterval(moveBall, 10);
+  setInterval(moveComputerPaddle, 35);
+});
+
+//Restart the game
+restartGameButton.addEventListener("click", () => {
+  playerScore.innerText = 0;
+  computerScore.innerText = 0;
+  resetBallPosition();
+});
+
+
 //Event Listeners ===================================
 
 //Track user key presses
