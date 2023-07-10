@@ -42,6 +42,19 @@ function resetBallPosition() {
   computerPadYVelocity = 3.15;
 }
 
+//Game Elements Modification ========================
+
+//Size of the game area (in pixels)
+const GAME_AREA_WIDTH = 700;
+const GAME_AREA_HEIGHT = 500;
+
+// Size of the paddles (in px)
+const PADDLE_HEIGHT = 100;
+const PADDLE_WIDTH = 20;
+
+//Size of the ball (in px)
+const BALL_SIZE = 20;
+
 //Event Listeners ===================================
 
 //Track user key presses
