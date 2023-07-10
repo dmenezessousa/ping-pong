@@ -42,6 +42,54 @@ function resetBallPosition() {
   computerPadYVelocity = 3.15;
 }
 
+//Move the ball
+function moveBall() {
+  ballXPosition += ballXVelocity;
+  ball.style.left = `${ballXPosition}px`;
+
+  ballYPosition += ballYVelocity;
+  ball.style.top = `${ballYPosition}px`;
+
+  ballCoord = ball.getBoundingClientRect();
+
+  //Resets the ball to its original position and adding a score for either the player or the computer
+  if (ballXPosition + BALL_SIZE > GAME_AREA_WIDTH) {
+    playerScore.innerText = parseInt(playerScore.innerText) + 1;
+    resetBallPosition();
+  } else if (ballXPosition < 0) {
+    computerScore.innerText = parseInt(computerScore.innerText) + 1;
+    console.log(computerScore.innerText);
+
+    resetBallPosition();
+  }
+
+  if (ballYPosition + BALL_SIZE > GAME_AREA_HEIGHT || ballYPosition < 0) {
+    ballYVelocity *= -1;
+  }
+
+  //Collision detection for the player paddle
+  if (
+    ballCoord.left <= playerPadCoord.right &&
+    ballCoord.top >= playerPadCoord.top &&
+    ballCoord.bottom <= playerPadCoord.bottom
+  ) {
+    ballXVelocity *= -1;
+    ballXVelocity += 0.5;
+    ball.style.border= "#fd01b0 1px solid";
+  }
+
+  //Collision detection for the computer paddle
+  if (
+    ballCoord.right >= computerPadCoord.left &&
+    ballCoord.top >= computerPadCoord.top &&
+    ballCoord.bottom <= computerPadCoord.bottom
+  ) {
+    ballXVelocity *= -1;
+    ballXVelocity -= 0.5;
+    ball.style.border= "chartreuse 1px solid";
+  }
+}
+
 //Game Elements Modification ========================
 
 //Size of the game area (in pixels)
