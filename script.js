@@ -41,3 +41,29 @@ function resetBallPosition() {
   computerPadYPosition = 400;
   computerPadYVelocity = 3.15;
 }
+
+//Event Listeners ===================================
+
+//Track user key presses
+document.addEventListener("keydown", (e) => {
+  if (e.code == "KeyW") {
+    if (playerPadYPosition >= 10) {
+      playerPadYPosition -= 15;//move 15px up
+    }
+  } else if (e.code == "KeyS") {
+    if (playerPadYPosition <= GAME_AREA_HEIGHT - PADDLE_HEIGHT - 10) {
+      playerPadYPosition += 15;//move 15px down
+    }
+  }
+
+  //maintain player paddle within the game area
+  if (
+    playerPadYPosition + PADDLE_HEIGHT > GAME_AREA_HEIGHT ||
+    playerPadYPosition < 0
+  ) {
+    return;
+  } else {
+    playerPaddle.style.top = `${playerPadYPosition}px`;
+  }
+  playerPadCoord = playerPaddle.getBoundingClientRect();
+});
