@@ -1,7 +1,7 @@
 //Get game Elements =================================
 
 let gameArea = document.querySelector(".game-area");
-let winnerText = document.querySelector("winner-text");
+let winnerText = document.querySelector(".winner-text");
 let playerPaddle = document.querySelector(".player-paddle");
 let computerPaddle = document.querySelector(".computer-paddle");
 let ball = document.querySelector(".ball");
@@ -11,6 +11,11 @@ let startGameButton = document.querySelector(".start-btn");
 let restartGameButton = document.querySelector(".restart-btn");
 
 // Game Variables and Functions ======================
+
+//global variables
+let movingBall;
+let movePc;
+let gameStarted = false;
 
 //Get coordinates from these elements
 let playerPadCoord = playerPaddle.getBoundingClientRect();
@@ -57,11 +62,11 @@ function resetBallPosition() {
 
 //Move the ball
 function moveBall() {
-  ballXPosition += ballXVelocity;
-  ball.style.left = `${ballXPosition}px`;
+  ballXPosition += ballXVelocity; //move the ball horizontally
+  ball.style.left = `${ballXPosition}px`; //set the ball's left position
 
-  ballYPosition += ballYVelocity;
-  ball.style.top = `${ballYPosition}px`;
+  ballYPosition += ballYVelocity; //move the ball vertically
+  ball.style.top = `${ballYPosition}px`; //set the ball's top position
 
   ballCoord = ball.getBoundingClientRect();
 
@@ -71,13 +76,11 @@ function moveBall() {
     resetBallPosition();
   } else if (ballXPosition < 0) {
     computerScore.innerText = parseInt(computerScore.innerText) + 1;
-    console.log(computerScore.innerText);
-
     resetBallPosition();
   }
 
   if (ballYPosition + BALL_SIZE > GAME_AREA_HEIGHT || ballYPosition < 0) {
-    ballYVelocity *= -1;
+    ballYVelocity *= -1; //reverse the ball's vertical direction
   }
 
   //Collision detection for the player paddle
@@ -88,7 +91,7 @@ function moveBall() {
   ) {
     ballXVelocity *= -1;
     ballXVelocity += 0.5;
-    ball.style.border= "#fd01b0 1px solid";
+    ball.style.border = "#fd01b0 1px solid";
   }
 
   //Collision detection for the computer paddle
@@ -99,7 +102,7 @@ function moveBall() {
   ) {
     ballXVelocity *= -1;
     ballXVelocity -= 0.5;
-    ball.style.border= "chartreuse 1px solid";
+    ball.style.border = "chartreuse 1px solid";
   }
 }
 
@@ -107,16 +110,16 @@ function moveBall() {
 function moveComputerPaddle() {
   if (ballYPosition > computerPadYPosition + PADDLE_HEIGHT / 2) {
     if (computerPadYPosition + PADDLE_HEIGHT <= GAME_AREA_HEIGHT) {
-      computerPadYPosition += computerPadYVelocity;
+      computerPadYPosition += computerPadYVelocity; //move 3.15px down
     }
-  } else{
+  } else {
     if (computerPadYPosition >= 0) {
-      computerPadYPosition -= computerPadYVelocity;
+      computerPadYPosition -= computerPadYVelocity; //move 3.15px up
     }
   }
 
   computerPaddle.style.top = `${computerPadYPosition}px`;
-  computerPadCoord = computerPaddle.getBoundingClientRect();
+  computerPadCoord = computerPaddle.getBoundingClientRect(); //sets the new computer paddle coordinates
 }
 
 //Start the game
@@ -125,29 +128,54 @@ startGameButton.addEventListener("click", () => {
   restartGameButton.style.display = "none";
   ball.style.display = "block";
   gameArea.style.display = "block";
-  setInterval(moveBall, 10);
-  setInterval(moveComputerPaddle, 35);
+  gameStarted = true;
+  movingBall = setInterval(moveBall, 10);
+  movePc = setInterval(moveComputerPaddle, 35);
 });
+
 
 //Restart the game
 restartGameButton.addEventListener("click", () => {
   playerScore.innerText = 0;
   computerScore.innerText = 0;
+  winnerText.innerText = "";
+  startGameButton.style.display = "";
+  //Stop Interval
+  clearInterval(movingBall);
+  clearInterval(movePc);
   resetBallPosition();
 });
 
+//Display the winner
+function displayWinner() {
+  if (playerScore.innerText == 3) {
+    winnerText.innerText = "Player 1 wins";
+    restartGameButton.style.display = "block";
+    ball.style.display = "none"
+    gameStarted = false;
+    clearInterval(movingBall);
+    clearInterval(movePc);
+  } else if (computerScore.innerText == 3) {
+    winnerText.innerText = "Computer wins";
+    restartGameButton.style.display = "";
+    ball.style.display = "none"
+    gameStarted = false;
+    clearInterval(movingBall);
+    clearInterval(movePc);
+  }
+}
 
 //Event Listeners ===================================
 
 //Track user key presses
 document.addEventListener("keydown", (e) => {
-  if (e.code == "KeyW") {
+  if (e.key == "w") {
     if (playerPadYPosition >= 10) {
-      playerPadYPosition -= 15;//move 15px up
+      playerPadYPosition -= 15; //move 15px up
     }
-  } else if (e.code == "KeyS") {
+  } else if (e.key == "s") {
     if (playerPadYPosition <= GAME_AREA_HEIGHT - PADDLE_HEIGHT - 10) {
-      playerPadYPosition += 15;//move 15px down
+      playerPadYPosition += 15; //move 15px down
     }
   }
 
@@ -162,3 +190,6 @@ document.addEventListener("keydown", (e) => {
   }
   playerPadCoord = playerPaddle.getBoundingClientRect();
 });
+
+//Call functions here ===============================
+setInterval(displayWinner, 10);
