@@ -30,3 +30,14 @@ let playerPadYVelocity = 3.15;
 //Computer paddle Y position and velocity
 let computerPadYPosition = 400;
 let computerPadYVelocity = 3.15;
+
+//reset ball and computer paddle positions
+function resetBallPosition() {
+  ballXPosition = 350;
+  ballYPosition = 100;
+  ballXVelocity = 1;
+  ballYVelocity = 1;
+
+  computerPadYPosition = 400;
+  computerPadYVelocity = 3.15;
+}
