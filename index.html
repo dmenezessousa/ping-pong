@@ -7,15 +7,24 @@
   <title>Ping-Pong</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <link href="https://fonts.cdnfonts.com/css/games" rel="stylesheet">
 </head>
 <body>
+    <header>
+      <h1 class="game-title"><span class="title_span_1">Ping </span><span class="title_span_2">Pong</span></h1>
+      <h2 class="winner-text"></h2>
+    </header>
     <div class="game-area">
       <h1 class="player_1_score">0</h1>
       <h1 class="player_2_score">0</h1>
-      <div class="paddle player_paddle"></div>
+      <div class="paddle player-paddle"></div>
       <div class="ball"></div>
-      <div class="paddle computer_paddle"></div>
+      <div class="paddle computer-paddle"></div>
       <div class="net"></div>
+    </div>
+    <div class="result-area">
+      <button class="start-btn">Start Game</button>
+      <button class="restart-btn">Restart Game</button>
     </div>
 </body>
 </html>

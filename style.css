@@ -1,0 +1,115 @@
+body {
+  background-image: url(/images/game_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: chartreuse;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Games", sans-serif;
+}
+
+header {
+  margin-top: 2em;
+}
+.title_span_1{
+  color: #fd01b0;
+}
+.title_span_2{
+  color: chartreuse;
+}
+.game-title {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 500px;
+  background-color: rgb(29, 26, 26);
+  background: rgba(0,0,0,0.5);
+  position: relative;
+  margin-left: 25vw;
+  margin-top: 1vh;
+}
+
+.paddle {
+  width: 20px;
+  height: 100px;
+  top: 100px;
+  position: absolute;
+  background-color: black;
+}
+
+.player-paddle {
+  left: 0;
+  border-right: 10px solid chartreuse;
+}
+
+.computer-paddle {
+  right: 0;
+  border-left: 10px solid #fd01b0;
+}
+
+.player_1_score {
+  height: 50px;
+  width: 50px;
+  color: chartreuse;
+  position: absolute;
+  top: 0;
+  left: 25%;
+  margin-top: 30px;
+}
+
+.player_2_score {
+  height: 50px;
+  width: 50px;
+  color: #fd01b0;
+  position: absolute;
+  top: 0;
+  right: 25%;
+  margin-top: 30px;
+}
+
+.net {
+  position: relative;
+  background-color: chartreuse;
+  width: 2px;
+  margin: 0 auto;
+  height: 500px;
+}
+
+.ball {
+  width: 20px;
+  height: 20px;
+  background-color: #fd01b0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.start-btn{
+  background-color: #fd01b0;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  border-radius: 5px;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+.restart-btn{
+  background-color: chartreuse;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  border-radius: 5px;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
