@@ -30,7 +30,7 @@ let ballYVelocity = 1;
 
 //Player paddle Y position and velocity
 let playerPadYPosition = 200;
-let playerPadYVelocity = 3.15;
+let playerPadYVelocity = 1;
 
 //Computer paddle Y position and velocity
 let computerPadYPosition = 400;
@@ -55,10 +55,10 @@ function resetBallPosition() {
   ballYPosition = 100;
   ballXVelocity = 1;
   ballYVelocity = 1;
+  ball.style.border = "#fd01b0 1px solid";
 
-  computerPadYPosition = 400;
-  computerPadYVelocity = 3.15;
-
+  playerPadYPosition = 200;
+  playerPadYVelocity = 3.15;
   computerPadYPosition = 400;
   computerPadYVelocity = 3.15;
 }
@@ -132,10 +132,17 @@ startGameButton.addEventListener("click", () => {
   ball.style.display = "block";
   gameArea.style.display = "block";
   gameStarted = true;
+  resetBallPosition();
   movingBall = setInterval(moveBall, 10);
   movePc = setInterval(moveComputerPaddle, 35);
 });
 
+function removeRestartButton() {
+  if(gameStarted == false) {
+    restartGameButton.style.display = "none";
+  }
+}
+removeRestartButton();
 
 //Restart the game
 restartGameButton.addEventListener("click", () => {
@@ -143,6 +150,7 @@ restartGameButton.addEventListener("click", () => {
   computerScore.innerText = 0;
   winnerText.innerText = "";
   startGameButton.style.display = "";
+  restartGameButton.style.display = "none";
   //Stop Interval
   clearInterval(movingBall);
   clearInterval(movePc);
@@ -174,11 +182,11 @@ function displayWinner() {
 document.addEventListener("keydown", (e) => {
   if (e.key == "w") {
     if (playerPadYPosition >= 10) {
-      playerPadYPosition -= 15; //move 15px up
+      playerPadYPosition -= 10; //move 10px up
     }
   } else if (e.key == "s") {
     if (playerPadYPosition <= GAME_AREA_HEIGHT - PADDLE_HEIGHT) {
-      playerPadYPosition += 15; //move 15px down
+      playerPadYPosition += 10; //move 10px down
     }
   }
 
