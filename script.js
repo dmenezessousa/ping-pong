@@ -58,6 +58,9 @@ function resetBallPosition() {
 
   computerPadYPosition = 400;
   computerPadYVelocity = 3.15;
+
+  computerPadYPosition = 400;
+  computerPadYVelocity = 3.15;
 }
 
 //Move the ball
@@ -148,14 +151,14 @@ restartGameButton.addEventListener("click", () => {
 
 //Display the winner
 function displayWinner() {
-  if (playerScore.innerText == 3) {
+  if (playerScore.innerText == 1) {
     winnerText.innerText = "Player 1 wins";
     restartGameButton.style.display = "block";
     ball.style.display = "none"
     gameStarted = false;
     clearInterval(movingBall);
     clearInterval(movePc);
-  } else if (computerScore.innerText == 3) {
+  } else if (computerScore.innerText == 1) {
     winnerText.innerText = "Computer wins";
     restartGameButton.style.display = "";
     ball.style.display = "none"
