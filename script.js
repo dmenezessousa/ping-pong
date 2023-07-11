@@ -177,7 +177,7 @@ document.addEventListener("keydown", (e) => {
       playerPadYPosition -= 15; //move 15px up
     }
   } else if (e.key == "s") {
-    if (playerPadYPosition <= GAME_AREA_HEIGHT - PADDLE_HEIGHT - 10) {
+    if (playerPadYPosition <= GAME_AREA_HEIGHT - PADDLE_HEIGHT) {
       playerPadYPosition += 15; //move 15px down
     }
   }
@@ -196,3 +196,6 @@ document.addEventListener("keydown", (e) => {
 
 //Call functions here ===============================
 setInterval(displayWinner, 10);
+
+
+
